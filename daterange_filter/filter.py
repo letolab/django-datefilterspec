@@ -39,7 +39,6 @@ except ImportError:
         kwargs_safe = dict((k, conditional_escape(v)) for (k, v) in kwargs.items())
         return mark_safe(format_string.format(*args_safe, **kwargs_safe))
 
-
 # Django doesn't deal well with filter params that look like queryset lookups.
 FILTER_PREFIX = 'drf__'
 
@@ -69,11 +68,10 @@ class DateRangeFilterBaseForm(forms.Form):
         except AttributeError:
             setattr(self.request, 'daterange_filter_media_included', True)
 
-            js = ["calendar.js", "admin/DateTimeShortcuts.js"]
             css = ['widgets.css']
 
             return forms.Media(
-                js=[static("admin/js/%s" % path) for path in js],
+                js=["admin/js/calendar.js", "date_widget/js/DateTimeShortcuts.js"],
                 css={'all': [static("admin/css/%s" % path) for path in css]}
             )
 
