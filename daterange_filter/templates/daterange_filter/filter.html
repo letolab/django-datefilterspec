@@ -26,12 +26,7 @@
 {% with choices.0 as i %}
 <form method="GET" action="">
     {{ spec.form.media }}
-    {% for field in spec.form %}
-    {{ field.errors }}
-    <p class="fieldWrapper">
-        {{ field }}
-    </p>
-    {% endfor %}
+    {{ spec.form.as_p }}
     <p class="submit-row">
         {#create hidden inputs to preserve values from other filters and search field#}
         {% for k, v in i.get_query.items %}
