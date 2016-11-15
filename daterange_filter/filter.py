@@ -23,11 +23,11 @@ else:
 
 if DATE_RANGE_FILTER_USE_WIDGET_SUIT:
     try:
-        from suit.widgets import SuitDateWidget as AdminDateWidget, SuitSplitDateTimeWidget as AdminSplitDateTime
+        from suit.widgets import SuitSplitDateTimeWidget as AdminSplitDateTime
     except ImportError:
-        from django.contrib.admin.widgets import AdminDateWidget, AdminSplitDateTime
+        from django.contrib.admin.widgets import AdminSplitDateTime
 else:
-    from django.contrib.admin.widgets import AdminDateWidget, AdminSplitDateTime
+    from django.contrib.admin.widgets import AdminSplitDateTime
 
 try:
     from django.utils.html import format_html
@@ -39,6 +39,7 @@ except ImportError:
         kwargs_safe = dict((k, conditional_escape(v)) for (k, v) in kwargs.items())
         return mark_safe(format_string.format(*args_safe, **kwargs_safe))
 
+from .widgets import AdminDateWidget
 
 # Django doesn't deal well with filter params that look like queryset lookups.
 FILTER_PREFIX = 'drf__'
